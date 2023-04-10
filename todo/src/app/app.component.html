@@ -1,7 +1,6 @@
-<h1>primeiro componente:</h1>
-
-<h3> {{title}} </h3>
+<h1> {{title}} </h1>
 <ul>
+  <p *ngIf="todos.length==0"><small>não tem nenhuma tarefa pendente</small></p>
   <li *ngFor = "let todo of todos">
     {{ todo.id }}. {{ todo.title }} 
     <button *ngIf="!todo.done" (click)="markAsDone(todo)">CONCLUIR</button>
@@ -9,3 +8,21 @@
     <button (click)="remove(todo)">REMOVER</button>
   </li>
 </ul>
+
+<form [formGroup]="form">
+  <fieldset>
+    <label>Tarefa: </label>
+
+    <input 
+      type="text"
+      placeholder="Título da tarefa"
+      maxlength="50"
+      formControlName="title">
+    
+    <small *ngIf="form.controls['title'].invalid && (form.controls['title'].pristine)">
+                                                   <!-- o pristine só é true quando o usuário já futricou na entrada -->
+      O título deve ter no máximo 50 caracteres e não pode ser vazio
+    </small>
+    <button [disabled]="form.invalid" (click)="add()">Salvar</button>
+  </fieldset>
+</form>
