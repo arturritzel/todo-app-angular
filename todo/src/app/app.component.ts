@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Todo } from 'src/models/todo.models';
 
 @Component({
   selector: 'app-root',
@@ -6,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public todos: any[] = [];
+  public todos: Todo[] = [];
 // publica      tipo: qualquer coisa kk (array pq [])
 //       nome da var    vazio (podia terminar em any[] mas dai a info seria undefined, e no caso, quero vazio)
   public title: String = 'meus afazeres:';
@@ -15,12 +16,24 @@ export class AppComponent {
    * ctor > tab
    */
   constructor() {
-    this.todos.push('brincar de boneca');
-    this.todos.push('comprar abacate');
-    this.todos.push('tropeçar no meio da rua');
+    this.todos.push(new Todo(1, 'fazer carinho no gatinho', false));
+    this.todos.push(new Todo(2, 'quebrar um cabinho (tem que ser com alicate)', false));
+    this.todos.push(new Todo(3, 'morrer atropelado', false));
   }
 
-  alteraTitulo(){
-    this.title = 'meus o que fazer:';
+  remove(todo: Todo){
+    const index = this.todos.indexOf(todo);
+
+    if(index !== -1){
+      this.todos.splice(index, 1);
+    }
+  }
+
+  markAsDone(todo: Todo){
+    todo.done = true;
+  }
+
+  markAsUndone(todo: Todo){
+    todo.done = false;
   }
 }
