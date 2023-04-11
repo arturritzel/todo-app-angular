@@ -1,28 +1,43 @@
-<h1> {{title}} </h1>
+<h1 class="title animated tada"> {{title}} </h1>
 <ul>
   <p *ngIf="todos.length==0"><small>não tem nenhuma tarefa pendente</small></p>
   <li *ngFor = "let todo of todos">
-    {{ todo.id }}. {{ todo.title }} 
-    <button *ngIf="!todo.done" (click)="markAsDone(todo)">CONCLUIR</button>
-    <button *ngIf="todo.done" (click)="markAsUndone(todo)">REFAZER</button>
-    <button (click)="remove(todo)">REMOVER</button>
+    {{ todo.title }} 
+
+    <button (click)="remove(todo)"><i class="far fa-trash-alt"></i></button>
+    
+    <button *ngIf="!todo.done" (click)=  "markAsDone(todo)"><i class="far fa-check-circle"></i></button>
+    <button *ngIf= "todo.done" (click)="markAsUndone(todo)"><i class="fas fa-check-circle"></i></button>
+
   </li>
 </ul>
 
-<form [formGroup]="form">
-  <fieldset>
-    <label>Tarefa: </label>
+<div *ngIf="mode == 'add'" class="animated flipInX">
+  <form [formGroup]="form">
+    <fieldset>
+      <label>Tarefa: </label>
 
-    <input 
-      type="text"
-      placeholder="Título da tarefa"
-      maxlength="50"
-      formControlName="title">
-    
-    <small *ngIf="form.controls['title'].invalid && (form.controls['title'].pristine)">
-                                                   <!-- o pristine só é true quando o usuário já futricou na entrada -->
+      <input 
+        type="text"
+        placeholder="Título da tarefa"
+        maxlength="50"
+        formControlName="title">
+      <button [disabled]="form.invalid" (click)="add()">Salvar</button>
+    </fieldset>
+      
+    <small *ngIf="form.controls['title'].invalid && !form.controls['title'].pristine">
+                                                  <!-- o pristine só é true quando o usuário já futricou na entrada -->
       O título deve ter no máximo 50 caracteres e não pode ser vazio
     </small>
-    <button [disabled]="form.invalid" (click)="add()">Salvar</button>
-  </fieldset>
-</form>
+  </form>
+</div>
+
+<button class="add-button animated fadeInUp button" (click)="changeMode('add')" *ngIf="mode === 'list'">
+  <i class="fas fa-plus-circle"></i>
+  NOVA TAREFA
+</button>
+
+<button class="add-button animated fadeInUp button" (click)="changeMode('list')" *ngIf="mode === 'add'">
+  <i class="fas fa-times"></i>
+  CANCELAR
+</button>

@@ -1,1 +1,55 @@
-/* You can add global styles to this file, and also import other style files */
+body{
+    height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+
+    font-family: Tahoma;
+    font-weight: 50;
+    text-align: center;
+
+    background: #9e8988;
+    background: linear-gradient(25deg, #FFFFFF 0%, #9e8988 100%);
+}
+
+button{
+    float: right;
+    text-align: right;
+    cursor: pointer;
+    background: blueviolet;
+    border-radius: 2px;
+}
+
+li{
+    padding: 0.5vh;
+    margin: 1vh;
+    
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    font-style: italic;
+}
+
+li>button{
+    border: none;
+    opacity: 0.6;
+    transition: opacity 1s;
+}
+
+li>button:hover{
+    opacity: 1;
+    transition: opacity 1s;
+}
+
+ul{
+    margin: 4vh;
+    padding: 2vh;
+
+    background: #FFFFFF;
+    border-radius: 20px;
+
+    box-shadow: 6px 8px 28px 2px rgba(50, 168, 82, 0.6);
+}
+
+.title{
+    font-family: 'Trebuchet MS';
+}

@@ -13,6 +13,7 @@ export class AppComponent {
 //       nome da var    vazio (podia terminar em any[] mas dai a info seria undefined, e no caso, quero vazio)
   public title: String = 'meus afazeres:';
   public form: FormGroup;
+  public mode: String = 'list';
 
 /**
    * ctor > tab
@@ -37,6 +38,7 @@ export class AppComponent {
 
     this.save();
     this.formClear();
+    this.changeMode('list');
   }
 
   formClear(){
@@ -71,5 +73,9 @@ export class AppComponent {
   load(){
     const data = localStorage.getItem('todos');
     if(data) this.todos = JSON.parse(data);
+  }
+
+  changeMode(mode:string){
+    this.mode = mode;
   }
 }
